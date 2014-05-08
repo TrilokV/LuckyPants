@@ -23,7 +23,7 @@ public class BooksConnectionProvider {
 				System.out.println("Could not connect to Database");
 			}
 
-			boolean auth = db.authenticate("unh", "unh".toCharArray());
+			boolean auth = db.authenticate("trilokv1", "trilokv1".toCharArray());
 			if (auth == false) {
 				System.out.println("Could not authenticate");
 			}
