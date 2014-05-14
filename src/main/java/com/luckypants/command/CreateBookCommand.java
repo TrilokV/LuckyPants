@@ -30,9 +30,9 @@ public class CreateBookCommand {
 	public static void main(String[] args) {
 		CreateBookCommand create = new CreateBookCommand();
 		Book book = new Book();
-		book.setAuthor("Trilok V");
-		book.setTitle("Java at first sight");
-		book.setISBN("222");
+		book.setAuthor("Gula");
+		book.setTitle("Book2");
+		book.setISBN("123");
 		if (create.execute(book)) {
 			System.out.println("SUCCESS:Book Created");
 		} else {

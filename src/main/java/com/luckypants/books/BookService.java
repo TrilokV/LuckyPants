@@ -18,6 +18,7 @@ import com.luckypants.command.CreateBookCommand;
 import com.luckypants.command.DeleteBookCommand;
 import com.luckypants.command.GetBookCommand;
 import com.luckypants.command.ListAllBooksCommand;
+import com.luckypants.command.SearchBookCommand;
 import com.luckypants.model.Book;
 import com.mongodb.DBObject;
 
@@ -63,15 +64,34 @@ public class BookService {
 	
 	@DELETE
 	@Path("/{isbn}")
-	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteBook(@PathParam("isbn") String isbn) {
 		DeleteBookCommand delete = new DeleteBookCommand();
-		if(delete.execute(isbn)){
-			return Response.status(200).entity(isbn).build();
-		}
-		else{
-			return Response.status(500).entity("ERROR: Could not delete"+isbn).build();
-		}
+		delete.execute(isbn);
+		return Response.status(200).build();
 		
 	}
+	
+	@GET
+	@Path("/{isbn}")
+	public Response searchBook(@PathParam("isbn") String isbn){
+		SearchBookCommand search = new SearchBookCommand();
+		search.executeSearchIsbn(isbn);
+		return Response.status(200).build();
+	}
+	
+/*	@GET
+	@Path("/{title}")
+	public Response searchBookTitle(@PathParam("title") String title){
+		SearchBookCommand search = new SearchBookCommand();
+		search.executeSearchTitle(title);
+		return Response.status(200).build();
+	}
+	
+	@GET
+	@Path("/{author}")
+	public Response searchBookAuthor(@PathParam("author") String author){
+		SearchBookCommand search = new SearchBookCommand();
+		search.executeSearchAuthor(author);
+		return Response.status(200).build();
+	}*/
 }
