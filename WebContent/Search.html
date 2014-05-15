@@ -5,8 +5,8 @@
 </script>
 <script>
 //we are reusing this URL, somove it to a variable
-base_url="http://localhost:5100/rest/books/";
-meta_url="http://localhost:5100/rest/metadata/";
+base_url="/rest/books/";
+meta_url="/rest/metadata/";
 $(document).ready(function(){
 
     $('#book_form').submit(function(){
@@ -23,7 +23,7 @@ $(document).ready(function(){
                 type: "GET",
                 url: "http://localhost:5100/rest/books/"+isbn,
                 success: function (data, status, jqXHR) {
-                    alert("FOUND");
+                    alert("ISBN: "+data.isbn+"\nBook Name: "+data.title+"\nAuthor: "+data.author);
                 },
                 error: function (jqXHR, status) {
                     console.log(jqXHR);
@@ -64,7 +64,7 @@ function searchData(title){
 </script>
 </head>
 <body>
-<h1 style="text-align:center;">Delete a Book</h1>
+<h1 style="text-align:center;">Search a Book</h1>
 <form id="book_form" method="POST">
 Enter ISBN of the book to be searched: <input type="text" class="isbn">
 

@@ -75,8 +75,8 @@ public class BookService {
 	@Path("/{isbn}")
 	public Response searchBook(@PathParam("isbn") String isbn){
 		SearchBookCommand search = new SearchBookCommand();
-		search.executeSearchIsbn(isbn);
-		return Response.status(200).build();
+		DBObject book = search.executeSearchIsbn(isbn);
+		return Response.status(200).entity(book).build();
 	}
 	
 /*	@GET
