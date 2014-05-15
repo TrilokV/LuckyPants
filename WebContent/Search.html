@@ -5,8 +5,8 @@
 </script>
 <script>
 //we are reusing this URL, somove it to a variable
-base_url="http://desolate-plateau-3879.herokuapp.com/rest/books";
-meta_url="http://desolate-plateau-3879.herokuapp.com/rest/metadata";
+base_url="/rest/books/";
+meta_url="/rest/metadata/";
 $(document).ready(function(){
 
     $('#book_form').submit(function(){
@@ -21,7 +21,7 @@ $(document).ready(function(){
     function searchData(isbn){
         $.ajax({
                 type: "GET",
-                url: "http://desolate-plateau-3879.herokuapp.com/rest/books"+isbn,
+                url: "http://localhost:5100/rest/books/"+isbn,
                 success: function (data, status, jqXHR) {
                     alert("ISBN: "+data.isbn+"\nBook Name: "+data.title+"\nAuthor: "+data.author);
                 },
