@@ -6,7 +6,7 @@
 </script>
 <script>
 	//we are reusing this URL, somove it to a variable
-	base_url = "/rest/books/";
+	base_url = "/rest/books/searchMe";
 	meta_url = "/rest/metadata/";
 	$(document).ready(
 			function() {
@@ -23,7 +23,7 @@
 				function searchData(isbn) {
 					$.ajax({
 						type : "GET",
-						url : "rest/books/searchMe" + isbn,
+						url : "rest/books/searchMe/" + isbn,
 						success : function(data, status, jqXHR) {
 							alert("ISBN       : " + data.isbn + 
 								  "\nBook Name: " + data.title + 
