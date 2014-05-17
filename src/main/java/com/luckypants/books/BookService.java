@@ -72,7 +72,7 @@ public class BookService {
 	}
 	
 	@GET
-	@Path("Search/{isbn}")
+	@Path("search/{isbn}")
 	public Response searchBook(@PathParam("isbn") String isbn){
 		SearchBookCommand search = new SearchBookCommand();
 		DBObject book = search.executeSearchIsbn(isbn);

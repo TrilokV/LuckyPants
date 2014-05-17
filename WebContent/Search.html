@@ -23,7 +23,7 @@
 				function searchData(isbn) {
 					$.ajax({
 						type : "GET",
-						url : "rest/books/Search/" + isbn,
+						url : "rest/books/search/" + isbn,
 						success : function(data, status, jqXHR) {
 							alert("ISBN       : " + data.isbn + 
 								  "\nBook Name: " + data.title + 
