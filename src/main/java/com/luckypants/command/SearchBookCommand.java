@@ -15,8 +15,9 @@ public class SearchBookCommand {
 
 		BasicDBObject searchQuery = new BasicDBObject();
 		searchQuery.put("isbn", isbn);
-		DBCursor cursor = (DBCursor) booksCollection.findOne(searchQuery);
-		DBObject book = cursor.next();
+		//DBCursor cursor = (DBCursor) booksCollection.findOne(searchQuery);
+		//DBObject book = cursor.next();
+		DBObject book = (DBObject) booksCollection.findOne(searchQuery); 
 		return book;
 		
 		//booksCollection.find(searchQuery);

@@ -76,7 +76,12 @@ public class BookService {
 	public Response searchBook(@PathParam("isbn") String isbn){
 		SearchBookCommand search = new SearchBookCommand();
 		DBObject book = search.executeSearchIsbn(isbn);
-		return Response.status(200).entity(book).build();
+		String r = "";
+		try{
+			r = mapper.writeValueAsString(book);
+		}
+		catch(Exception e){}
+		return Response.status(200).entity(r).build();
 	}
 	
 /*	@GET
