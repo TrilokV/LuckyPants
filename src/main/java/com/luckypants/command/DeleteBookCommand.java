@@ -12,6 +12,7 @@ public class DeleteBookCommand {
 
 		BasicDBObject searchQuery = new BasicDBObject();
 		searchQuery.put("isbn", isbn);
+
 		//DBCursor cursor = booksCollection.find(searchQuery);
 
 		booksCollection.remove(searchQuery);

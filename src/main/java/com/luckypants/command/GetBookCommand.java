@@ -14,6 +14,7 @@ public class GetBookCommand {
 
 		BasicDBObject searchQuery = new BasicDBObject();
 		searchQuery.put("isbn", isbn);
+
 		DBCursor cursor = booksCollection.find(searchQuery);
 		DBObject book = cursor.next();
 		
@@ -24,4 +25,5 @@ public class GetBookCommand {
 		GetBookCommand command = new GetBookCommand();
 		System.out.println(command.execute("1234"));
 	}
+
 }
