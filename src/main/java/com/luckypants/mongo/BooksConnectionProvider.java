@@ -2,28 +2,34 @@ package com.luckypants.mongo;
 
 import java.net.UnknownHostException;
 
+//import java.util.Properties;
+
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.luckypants.properties.*;
 
-public class BooksConnectionProvider {
+public class BooksConnectionProvider extends PropertiesLookup {
 	/**
 	 * TODO:modify this method to allow passing the collection name to it
 	 * @return
 	 */
 
+	
 	public DBCollection getCollection() {
+		PropertiesLookup p = new PropertiesLookup();
 		try {
-
-			MongoClient mongo = new MongoClient("oceanic.mongohq.com", 10011);
-
-			DB db = mongo.getDB("luckypants");
+			String mongoDbUrl = p.getProperty("mongodbURL");
+			int mongoDbPort = Integer.parseInt(p.getProperty("mongodbPORT"));
+			MongoClient mongo = new MongoClient(mongoDbUrl, mongoDbPort);
+			String dbName = p.getProperty("mongoDbName");
+			DB db = mongo.getDB(dbName);
 			if (db == null) {
 				System.out.println("Could not connect to Database");
 			}
-
-			boolean auth = db.authenticate("trilokv1", "trilokv1".toCharArray());
+			
+			boolean auth = db.authenticate("trilokv", "trilokv".toCharArray());
 			if (auth == false) {
 				System.out.println("Could not authenticate");
 			}
@@ -39,7 +45,7 @@ public class BooksConnectionProvider {
 		return null;
 
 	}
-
+ 
 	public static void main(String[] args) {
 		BooksConnectionProvider books = new BooksConnectionProvider();
 		DBCollection booksCollection = books.getCollection();

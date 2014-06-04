@@ -3,6 +3,8 @@ package com.luckypants.properties;
 import java.io.InputStream;
 import java.util.Properties;
 
+
+
 public class PropertiesLookup {
 
 	Properties prop = new Properties();
@@ -11,6 +13,7 @@ public class PropertiesLookup {
 
 	public PropertiesLookup() {
 		try {
+			
 			input = getClass().getClassLoader().getResourceAsStream(filename);
 			if (input == null) {
 				System.out.println("Sorry, unable to find " + filename);
