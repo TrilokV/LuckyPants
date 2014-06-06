@@ -32,8 +32,11 @@ $(document).ready(function(){
     $('#book_form').submit(function(){
     	console.log($('#book_form').serializeObject());
     	postData($('#book_form').serializeObject());
+    	postData($('#authors').serializeObject());
     	return false;
     });
+    
+    
     function postData(data){
         $.ajax({
                 type: "PUT",
@@ -50,7 +53,7 @@ $(document).ready(function(){
                     alert('failed, please check console for errors');
                 }
              });
-       }
+       } 
     
 });
 
@@ -60,9 +63,17 @@ $(document).ready(function(){
 <h1 style="text-align:center;">Create a new book</h1>
 <form id="book_form" method="POST">
 <div class="book_div">
-<select class="authors">
-
-<option value = ""></option>
+Please select Author:
+<select class="authors" name="Authors List" id="add">
+<option value ="0">Select Author</option>
+<option value = "Mark Miller">Mark Miller</option>
+<option value = "John Jean">John Jean</option>
+<option value = "Matt Mitton">Matt Mitton</option>
+<option value = "Ralph Caroline">Ralph Caroline</option>
+<option value = "Roberto Fernandiz">Roberto Fernandiz</option>
+<option value = "Deepak Patre">Deepak Patre</option>
+<option value = "Amar B">Amar B</option>
+<option value = "Neelam Kumar">Neelam Kumar</option>
 </select>
 
 </div>
