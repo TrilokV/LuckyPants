@@ -27,7 +27,7 @@ public class MongoTest {
 			/**
 			 * Connect to Mongo DB
 			 */
-			MongoClient mongo = new MongoClient("oceanic.mongohq.com", 10099);
+			MongoClient mongo = new MongoClient("kahana.mongohq.com", 10070);
 
 			/**
 			 * Connect to DB
@@ -40,7 +40,7 @@ public class MongoTest {
 			/**
 			 * authenticate to Mongo HQ
 			 */
-			boolean auth = db.authenticate("unh", "unh".toCharArray());
+			boolean auth = db.authenticate("loki", "loki".toCharArray());
 			if (auth == false) {
 				System.out.println("Could not authenticate");
 			}

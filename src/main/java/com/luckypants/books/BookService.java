@@ -22,6 +22,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.luckypants.command.CreateBookCommand;
 import com.luckypants.command.DeleteBookCommand;
 import com.luckypants.command.GetBookCommand;
+import com.luckypants.command.ListAllAuthorsCommand;
 import com.luckypants.command.ListAllBooksCommand;
 import com.luckypants.command.ProvidePackagedFileCommand;
 import com.luckypants.model.Book;
@@ -125,6 +126,7 @@ public class BookService {
 	@Path("inline/{filename}")
 	@Produces(MediaType.WILDCARD)
 	public Response renderFile(@PathParam("filename") String filename) {
+
 		try {
 			ProvidePackagedFileCommand getFile = new ProvidePackagedFileCommand();
 			InputStream is = getFile.execute(filename);
@@ -136,5 +138,15 @@ public class BookService {
 		} catch (Exception e) {
 			return Response.status(404).entity(e.getMessage()).build();
 		}
+	}
+	
+	@GET
+	@Path("authors")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listAuthors() {
+		ListAllAuthorsCommand listAuthors = new ListAllAuthorsCommand();
+		ArrayList<DBObject> listA = listAuthors.execute();
+		System.out.print(listA);
+		return Response.status(200).entity(listA).build();
 	}
 }

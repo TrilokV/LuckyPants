@@ -18,19 +18,21 @@ public class BooksConnectionProvider extends PropertiesLookup {
 
 	
 	public DBCollection getCollection() {
-		PropertiesLookup p = new PropertiesLookup();
+		//PropertiesLookup p = new PropertiesLookup();
 		try {
-			String mongoDbUrl = p.getProperty("mongodbURL");
-			int mongoDbPort = Integer.parseInt(p.getProperty("mongodbPORT"));
-			MongoClient mongo = new MongoClient(mongoDbUrl, mongoDbPort);
-			String dbName = p.getProperty("mongoDbName");
-			DB db = mongo.getDB(dbName);
+			//String mongoDbUrl = p.getProperty("mongodbURL");
+			//int mongoDbPort = Integer.parseInt(p.getProperty("mongodbPORT"));
+			MongoClient mongo = new MongoClient("kahana.mongohq.com", 10070);
+			//String dbName = p.getProperty("mongoDbName");
+			DB db = mongo.getDB("luckypants");
 			if (db == null) {
 				System.out.println("Could not connect to Database");
 			}
+			String str = "loki"; 
+			char[] a=str.toCharArray();
+			boolean auth = db.authenticate("loki",a);
 			
-			boolean auth = db.authenticate("trilokv", "trilokv".toCharArray());
-			if (auth == false) {
+			if (!auth) {
 				System.out.println("Could not authenticate");
 			}
 

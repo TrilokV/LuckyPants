@@ -1,4 +1,4 @@
-package com.luckypants.books;
+package com.luckypants.authors;
 
 import java.io.IOException;
 
@@ -13,31 +13,11 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.luckypants.model.Authors;
-import com.luckypants.model.Book;
 
 @Path("/metadata")
 public class MetadataService {
 	ObjectMapper mapper = new ObjectMapper();
 
-	@GET
-	@Path("/book")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getBookMetadata() {
-		Book book = new Book();
-		String bookJSON;
-		try {
-			bookJSON = mapper.writeValueAsString(book);
-			return Response.status(200).entity(bookJSON).build();
-		} catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return Response.status(500).build();
-	}
-	
 	@GET
 	@Path("/authors")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -56,6 +36,5 @@ public class MetadataService {
 		}
 		return Response.status(500).build();
 	}
-
 
 }
