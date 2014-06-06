@@ -4,7 +4,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js">
 </script>
 <script>
-//we are reusing this URL, somove it to a variable
+//we are reusing this URL, so move it to a variable
 base_url="/rest/books/";
 meta_url="/rest/metadata/";
 $(document).ready(function(){
@@ -51,6 +51,7 @@ $(document).ready(function(){
                 }
              });
        }
+    
 });
 
 </script>
@@ -58,8 +59,13 @@ $(document).ready(function(){
 <body>
 <h1 style="text-align:center;">Create a new book</h1>
 <form id="book_form" method="POST">
-<div class="book_div"></div>
+<div class="book_div">
+<select class="authors">
 
+<option value = ""></option>
+</select>
+
+</div>
 <input type="Submit">
 </form>
 </body>
