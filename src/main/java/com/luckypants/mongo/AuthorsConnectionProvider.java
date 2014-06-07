@@ -6,30 +6,30 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
-import com.luckypants.properties.*;
 
-public class AuthorsConnectionProvider extends PropertiesLookup {
+public class AuthorsConnectionProvider {
+	/**
+	 * TODO:modify this method to allow passing the collection name to it
+	 * @return
+	 */
 
-	public DBCollection getCollection() {
-		PropertiesLookup p = new PropertiesLookup();
+	public DBCollection getCollection(String collectionName) {
 		try {
-			String mongoDbUrl = p.getProperty("mongodbURL");
-			//int mongoDbPort = Integer.parseInt(p.getProperty("mongodbPORT"));
-			MongoClient mongo = new MongoClient(mongoDbUrl, 10070);
-			String dbName = p.getProperty("mongoDbName");
-			DB db = mongo.getDB(dbName);
+
+			MongoClient mongo = new MongoClient("kahana.mongohq.com", 10070);
+
+			DB db = mongo.getDB("luckypants");
 			if (db == null) {
 				System.out.println("Could not connect to Database");
 			}
-			//System.out.print("trilokv1".toCharArray());
+
 			boolean auth = db.authenticate("loki", "loki".toCharArray());
-	
 			if (auth == false) {
 				System.out.println("Could not authenticate");
 			}
-			//String collName = p.getProperty("mongoDbColl");
-			DBCollection authorColl = db.getCollection("authors");
-			return authorColl;
+
+			DBCollection booksColl = db.getCollection(collectionName);
+			return booksColl;
 
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -39,16 +39,6 @@ public class AuthorsConnectionProvider extends PropertiesLookup {
 		return null;
 
 	}
- 
-	public static void main(String[] args) {
-		AuthorsConnectionProvider authors = new AuthorsConnectionProvider();
-		DBCollection authorsCollection = authors.getCollection();
-		if(authorsCollection == null){
-			System.out.println("ERROR:No Connection");
-		}
-		else{
-			System.out.println("SUCCESS:Connected");
-		}
 
-	}
+
 }

@@ -7,12 +7,25 @@
 //we are reusing this URL, so move it to a variable
 base_url="/rest/books/";
 meta_url="/rest/metadata/";
+auth_url="/rest2/authors/";
 $(document).ready(function(){
     $.getJSON(meta_url+"book",function(data){
     		$.each(data, function(key, value){
-    			$("div.book_div").append("<br/>Please enter " + key + ":"+"<input type='text' name='"+key+"'"+">");
+    			if(key!="author" && key!="genres"){
+    				$("div.book_div").append("<br/>Please enter " + key + ":"+"<input type='text' name='"+key+"'"+">");
+    			}
     		});
     });
+    
+    $.getJSON(auth_url,function(data1){
+		$.each(data1, function(count, object){
+			if(object.id != undefined){
+				$('#add').append("<br>Author Name: <option value = "+object.id+">"+object.fname+"</option>");	
+			}
+		});
+});
+    	
+   
     $.fn.serializeObject = function()
     {
        var o = {};
@@ -32,10 +45,8 @@ $(document).ready(function(){
     $('#book_form').submit(function(){
     	console.log($('#book_form').serializeObject());
     	postData($('#book_form').serializeObject());
-    	postData($('#authors').serializeObject());
     	return false;
     });
-    
     
     function postData(data){
         $.ajax({
@@ -63,20 +74,11 @@ $(document).ready(function(){
 <h1 style="text-align:center;">Create a new book</h1>
 <form id="book_form" method="POST">
 <div class="book_div">
-Please select Author:
-<select class="authors" name="Authors List" id="add">
-<option value ="0">Select Author</option>
-<option value = "Mark Miller">Mark Miller</option>
-<option value = "John Jean">John Jean</option>
-<option value = "Matt Mitton">Matt Mitton</option>
-<option value = "Ralph Caroline">Ralph Caroline</option>
-<option value = "Roberto Fernandiz">Roberto Fernandiz</option>
-<option value = "Deepak Patre">Deepak Patre</option>
-<option value = "Amar B">Amar B</option>
-<option value = "Neelam Kumar">Neelam Kumar</option>
-</select>
 
 </div>
+<select id="add" name="_authorId">
+
+</select>
 <input type="Submit">
 </form>
 </body>

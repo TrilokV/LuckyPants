@@ -25,6 +25,7 @@ import com.luckypants.command.GetBookCommand;
 import com.luckypants.command.ListAllAuthorsCommand;
 import com.luckypants.command.ListAllBooksCommand;
 import com.luckypants.command.ProvidePackagedFileCommand;
+import com.luckypants.model.Authors;
 import com.luckypants.model.Book;
 import com.luckypants.properties.PropertiesLookup;
 import com.mongodb.DBObject;
@@ -145,7 +146,7 @@ public class BookService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listAuthors() {
 		ListAllAuthorsCommand listAuthors = new ListAllAuthorsCommand();
-		ArrayList<DBObject> listA = listAuthors.execute();
+		ArrayList<Authors> listA = listAuthors.execute();
 		System.out.print(listA);
 		return Response.status(200).entity(listA).build();
 	}
